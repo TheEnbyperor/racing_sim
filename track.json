@@ -1,0 +1,1611 @@
+{
+  "width": 11,
+  "surfaces": {
+    "road": {
+      "tex": "Road.png",
+      "len": 20,
+      "width": 20
+    },
+    "grass": {
+      "tex": "tr-grass.rgb",
+      "len": 35,
+      "width": 35
+    },
+    "sand": {
+      "tex": "tr-sand.rgb",
+      "len": 20,
+      "width": 20
+    }
+  },
+  "segments": [
+    {
+      "type": "str",
+      "length": 120,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 11,
+          "end_width": 11,
+          "surface": "road"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 3,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 240,
+      "grade": 1,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 11,
+          "end_width": 8,
+          "surface": "road"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 2,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "arc",
+      "arc": 3,
+      "radius": 1800,
+      "end_radius": 2100,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 8,
+          "end_width": 5,
+          "surface": "road"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 2,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "arc",
+      "arc": 2,
+      "radius": -2700,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 5,
+          "end_width": 2,
+          "surface": "road"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 2,
+          "end_width": 3,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 22.5,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 2,
+          "end_width": 2,
+          "surface": "road"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 4,
+          "end_width": 3,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "arc",
+      "arc": 3.5,
+      "radius": -525,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 2,
+          "end_width": 5,
+          "surface": "road"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 3,
+          "end_width": 3,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 75,
+      "grade": -0.5,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 4,
+          "end_width": 7,
+          "surface": "grass"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 3,
+          "end_width": 7,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 75,
+      "grade": -0.5,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 7,
+          "end_width": 11,
+          "surface": "grass"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 7,
+          "end_width": 15,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "arc",
+      "arc": 1,
+      "radius": 3000,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 11,
+          "end_width": 13,
+          "surface": "grass"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 15,
+          "end_width": 29,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 45,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 13,
+          "end_width": 15,
+          "surface": "grass"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 29,
+          "end_width": 29,
+          "surface": "sand"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 69,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 15,
+          "end_width": 10,
+          "surface": "sand"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 29,
+          "end_width": 29,
+          "surface": "sand"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 40.5,
+      "grade": 1.8,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 10,
+          "end_width": 8,
+          "surface": "sand"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 29,
+          "end_width": 5,
+          "surface": "sand"
+        }
+      ]
+    },
+    {
+      "type": "arc",
+      "arc": 2,
+      "radius": 1500,
+      "end_radius": 1350,
+      "grade": 3.2,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 8,
+          "end_width": 4,
+          "surface": "grass"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 5,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 75,
+      "grade": 3.4,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 4,
+          "end_width": 3,
+          "surface": "grass"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 2,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 45,
+      "grade": 3.6,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 3,
+          "end_width": 3,
+          "surface": "grass"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 2,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "arc",
+      "arc": 8,
+      "radius": 279,
+      "end_radius": 372,
+      "grade": 3.9,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 3,
+          "end_width": 9,
+          "surface": "grass"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 2,
+          "end_width": 1,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "arc",
+      "arc": 18,
+      "radius": 210,
+      "end_radius": 454.5,
+      "grade": 4.2,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 9,
+          "end_width": 46,
+          "surface": "sand"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 1,
+          "end_width": 1,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "arc",
+      "arc": 21.999999999999996,
+      "radius": 315.5,
+      "end_radius": 210,
+      "grade": 4.8,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 46,
+          "end_width": 36,
+          "surface": "sand"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 1,
+          "end_width": 1,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "arc",
+      "arc": 25,
+      "radius": 376.5,
+      "end_radius": 342,
+      "grade": 4.8,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 36,
+          "end_width": 25,
+          "surface": "sand"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 1,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 22.5,
+      "grade": 4.8,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 25,
+          "end_width": 21,
+          "surface": "grass"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 2,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 45,
+      "grade": 3.7,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 21,
+          "end_width": 15,
+          "surface": "grass"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 2,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "arc",
+      "arc": 7.499999999999999,
+      "radius": 405,
+      "end_radius": 465,
+      "grade": 2.5,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 15,
+          "end_width": 9,
+          "surface": "grass"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 2,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 112.5,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 9,
+          "end_width": 9,
+          "surface": "grass"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 2,
+          "end_width": 3,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 123,
+      "grade": -1,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 9,
+          "end_width": 9,
+          "surface": "grass"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 3,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "arc",
+      "arc": 18,
+      "radius": -40.5,
+      "end_radius": -142.5,
+      "grade": -2,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 9,
+          "end_width": 6,
+          "surface": "grass"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 2,
+          "end_width": 5,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 60,
+      "grade": -2,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 6,
+          "end_width": 11,
+          "surface": "grass"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 5,
+          "end_width": 25,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "arc",
+      "arc": 3.5,
+      "radius": 1350,
+      "end_radius": 1200,
+      "grade": -1.2,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 11,
+          "end_width": 17,
+          "surface": "sand"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 25,
+          "end_width": 41,
+          "surface": "sand"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 7.5,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 17,
+          "end_width": 17,
+          "surface": "grass"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 41,
+          "end_width": 2,
+          "surface": "sand"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 19.5,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 17,
+          "end_width": 17,
+          "surface": "grass"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 2,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 150,
+      "grade": 1.2,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 16,
+          "end_width": 9,
+          "surface": "grass"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 2,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 79.5,
+      "grade": 2,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 9,
+          "end_width": 11,
+          "surface": "grass"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 2,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 19.5,
+      "grade": 0.5,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 11,
+          "end_width": 11,
+          "surface": "grass"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 2,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "arc",
+      "arc": 59.99999999999999,
+      "radius": 75,
+      "grade": -2.3,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 11,
+          "end_width": 26,
+          "surface": "sand"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 2,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "arc",
+      "arc": 29.999999999999996,
+      "radius": 69,
+      "end_radius": 84,
+      "grade": -3.5,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 26,
+          "end_width": 35,
+          "surface": "sand"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 2,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "arc",
+      "arc": 12.999999999999998,
+      "radius": 75,
+      "end_radius": 108,
+      "grade": -4,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 35,
+          "end_width": 35,
+          "surface": "sand"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 2,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 67.5,
+      "grade": -3.5,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 35,
+          "end_width": 35,
+          "surface": "sand"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 2,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 132,
+      "grade": -3,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 35,
+          "end_width": 35,
+          "surface": "grass"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 2,
+          "end_width": 3,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 28.5,
+      "grade": -3.5,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 35,
+          "end_width": 35,
+          "surface": "sand"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 3,
+          "end_width": 3,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "arc",
+      "arc": 20,
+      "radius": 69,
+      "grade": -3.5,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 35,
+          "end_width": 41,
+          "surface": "sand"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 3,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "arc",
+      "arc": 46.4,
+      "radius": 36,
+      "end_radius": 16.5,
+      "grade": -3.5,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 41,
+          "end_width": 37,
+          "surface": "sand"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 2,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 18,
+      "grade": -3.5,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 37,
+          "end_width": 35,
+          "surface": "sand"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 2,
+          "end_width": 3,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 60,
+      "grade": -3,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 35,
+          "end_width": 27,
+          "surface": "sand"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 3,
+          "end_width": 3,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 30,
+      "grade": -3,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 27,
+          "end_width": 25,
+          "surface": "sand"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 3,
+          "end_width": 5,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 156,
+      "grade": -2.2,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 25,
+          "end_width": 6,
+          "surface": "grass"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 5,
+          "end_width": 13,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 91.5,
+      "grade": -4,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 6,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 13,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "arc",
+      "arc": 12.600000000000001,
+      "radius": -201,
+      "end_radius": -210,
+      "grade": -5.3,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 2,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 2,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 30,
+      "grade": -5.7,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 2,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 2,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 70,
+      "grade": -6.5,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 2,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 2,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 75,
+      "grade": -2.5,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 2,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 2,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 55,
+      "grade": 1.5,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 2,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 2,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 60,
+      "grade": 3,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 2,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 2,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 75,
+      "grade": 2,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 2,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 2,
+          "end_width": 3,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 136.5,
+      "grade": 0.5,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 2,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 3,
+          "end_width": 3,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 58.5,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 2,
+          "end_width": 6,
+          "surface": "grass"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 3,
+          "end_width": 13,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "arc",
+      "arc": 29,
+      "radius": -108,
+      "end_radius": -45,
+      "grade": -0.7,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 6,
+          "end_width": 17,
+          "surface": "grass"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 13,
+          "end_width": 13,
+          "surface": "sand"
+        }
+      ]
+    },
+    {
+      "type": "arc",
+      "arc": 29.999999999999996,
+      "radius": -40,
+      "end_radius": -92,
+      "grade": -1,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 17,
+          "end_width": 24,
+          "surface": "sand"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 16,
+          "end_width": 33,
+          "surface": "sand"
+        }
+      ]
+    },
+    {
+      "type": "arc",
+      "arc": 70,
+      "radius": 102,
+      "end_radius": 50,
+      "grade": 0.4,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 24,
+          "end_width": 24,
+          "surface": "sand"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 33,
+          "end_width": 32,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "arc",
+      "arc": 40,
+      "radius": -33,
+      "end_radius": -98,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 24,
+          "end_width": 22,
+          "surface": "sand"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 32,
+          "end_width": 5,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "arc",
+      "arc": 13.8,
+      "radius": -103.5,
+      "end_radius": -249,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 22,
+          "end_width": 17,
+          "surface": "sand"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 5,
+          "end_width": 31,
+          "surface": "sand"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 49.5,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 17,
+          "end_width": 17,
+          "surface": "grass"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 31,
+          "end_width": 31,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 40.5,
+      "grade": -0.8,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 17,
+          "end_width": 17,
+          "surface": "sand"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 31,
+          "end_width": 24,
+          "surface": "sand"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 148.5,
+      "grade": -2,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 17,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 24,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 168,
+      "grade": -1.5,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 2,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 2,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 656,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 2,
+          "end_width": 3,
+          "surface": "grass"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 2,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 57,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 3,
+          "end_width": 9,
+          "surface": "grass"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 2,
+          "end_width": 9,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "arc",
+      "arc": 59.99999999999999,
+      "radius": 84,
+      "end_radius": 75,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 9,
+          "end_width": 33,
+          "surface": "sand"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 9,
+          "end_width": 1,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "arc",
+      "arc": 47,
+      "radius": 75,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 33,
+          "end_width": 28,
+          "surface": "sand"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 1,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 22.5,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 28,
+          "end_width": 31,
+          "surface": "sand"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 2,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "arc",
+      "arc": 20,
+      "radius": 196.5,
+      "end_radius": 127.5,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 31,
+          "end_width": 37,
+          "surface": "sand"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 2,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "arc",
+      "arc": 25,
+      "radius": 157.5,
+      "end_radius": 75,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 37,
+          "end_width": 34,
+          "surface": "sand"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 2,
+          "end_width": 2,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 60,
+      "grade": 1.7,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 34,
+          "end_width": 19,
+          "surface": "sand"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 2,
+          "end_width": 3,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "arc",
+      "arc": 15,
+      "radius": 195,
+      "end_radius": 216,
+      "grade": 1.4,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 19,
+          "end_width": 13,
+          "surface": "sand"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 3,
+          "end_width": 3,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "arc",
+      "arc": 8.724,
+      "radius": 410,
+      "end_radius": 355,
+      "grade": 1,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 13,
+          "end_width": 11,
+          "surface": "road"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 3,
+          "end_width": 3,
+          "surface": "grass"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 30,
+      "grade": 0.3,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 11,
+          "end_width": 11,
+          "surface": "road"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 3,
+          "end_width": 3,
+          "surface": "road"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 58.5,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 11,
+          "end_width": 11,
+          "surface": "road"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 3,
+          "end_width": 16,
+          "surface": "road"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 130,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 11,
+          "end_width": 11,
+          "surface": "road"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 16,
+          "end_width": 16,
+          "surface": "road"
+        }
+      ]
+    },
+    {
+      "type": "str",
+      "length": 78,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 11,
+          "end_width": 11,
+          "surface": "road"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 16,
+          "end_width": 16,
+          "surface": "road"
+        }
+      ]
+    },
+    {
+      "type": "arc",
+      "arc": 2.76,
+      "radius": 3550.0,
+      "end_radius": 332.8,
+      "grade": 1.4,
+      "surface": "road",
+      "left_side": [
+        {
+          "start_width": 11,
+          "end_width": 11,
+          "surface": "road"
+        }
+      ],
+      "right_side": [
+        {
+          "start_width": 16,
+          "end_width": 3,
+          "surface": "road"
+        }
+      ]
+    }
+  ]
+}
