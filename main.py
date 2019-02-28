@@ -2,7 +2,7 @@ from direct.showbase.ShowBase import ShowBase
 from direct.showbase.DirectObject import DirectObject
 from panda3d.core import GeomVertexFormat, GeomVertexData, Geom, GeomTriangles, GeomVertexWriter, TextureAttrib, \
     RenderState, GeomNode, LVector3, Vec3, Point3, DirectionalLight, AmbientLight, Vec4, BitMask32, Fog, \
-    TransparencyAttrib
+    TransparencyAttrib, TransformState
 from direct.gui.OnscreenImage import OnscreenImage
 from direct.gui.OnscreenText import OnscreenText
 from panda3d.bullet import BulletWorld, BulletTriangleMesh, BulletDebugNode, BulletTriangleMeshShape, \
@@ -177,14 +177,13 @@ class MyTapper(DirectObject):
         self.accelerator = 0
         self.brake = 0
 
-        self.gear_ratios = [-4, 3.9, 2.9, 2.3, 1.87, 1.68, 1.54, 1.46]
+        self.gear_ratios = [-4, 0, 3.9, 2.9, 2.3, 1.87, 1.68, 1.54, 1.46]
         self.gear = 1
         self.differential_ratio = 4.5
         self.transmission_efficiency = 0.95
         self.wheel_radius = 0.4
         self.drag_coefficient = 0.48
         self.engine_torque_curve = [
-            (0, 100),
             (1000, 100),
             (2000, 120),
             (3000, 140),
@@ -387,11 +386,12 @@ class MyTapper(DirectObject):
         car_shape = BulletBoxShape(Vec3((car_bounds[1].x - car_bounds[0].x) / 2,
                                         (car_bounds[1].y - car_bounds[0].y) / 2,
                                         (car_bounds[1].z - car_bounds[0].z) / 2))
+        car_ts = TransformState.makePos(Point3(0, 0, 0.5))
 
         self.car_node = render.attachNewNode(BulletRigidBodyNode('Car'))
         self.car_node.node().setDeactivationEnabled(False)
-        self.car_node.node().setMass(1200)
-        self.car_node.node().addShape(car_shape)
+        self.car_node.node().setMass(600)
+        self.car_node.node().addShape(car_shape, car_ts)
         world.attachRigidBody(self.car_node.node())
         car.reparentTo(self.car_node)
         self.car_node.setPos(0, 6, 1)
@@ -400,16 +400,18 @@ class MyTapper(DirectObject):
         self.car.setCoordinateSystem(ZUp)
         world.attachVehicle(self.car)
 
-        speed_dial = OnscreenImage(image='speed360.rgb', pos=(-0.15, 0, 0.15), scale=(0.15, 1, 0.15),
+        dial_scale = 0.2
+
+        speed_dial = OnscreenImage(image='speed360.rgb', pos=(-dial_scale, 0, dial_scale), scale=(dial_scale, 1, dial_scale),
                                    parent=base.a2dBottomCenter)
         speed_dial.setTransparency(TransparencyAttrib.MAlpha)
         self.speed_dial = OnscreenImage(image='dial.rgb', parent=speed_dial)
 
-        rpm_dial = OnscreenImage(image='rpm20000.rgb', pos=(0.15, 0, 0.15), scale=(0.15, 1, 0.15),
+        rpm_dial = OnscreenImage(image='rpm20000.rgb', pos=(dial_scale, 0, dial_scale), scale=(dial_scale, 1, dial_scale),
                                  parent=base.a2dBottomCenter)
         rpm_dial.setTransparency(TransparencyAttrib.MAlpha)
         self.rpm_dial = OnscreenImage(image='dial.rgb', parent=rpm_dial)
-        self.gear_text = OnscreenText(text='1', pos=(0, -0.65), scale=0.4, parent=rpm_dial, fg=(255, 0, 0, 1))
+        self.gear_text = OnscreenText(text='N', pos=(-0.02, -0.67), scale=0.4, parent=rpm_dial, fg=(255, 0, 0, 1))
 
         wheel_fl = loader.loadModel("wheelL")
         wheel_fl.reparentTo(render)
@@ -444,7 +446,7 @@ class MyTapper(DirectObject):
         taskMgr.add(self.update, 'update')
 
     def make_wheel(self, pos, front, np):
-        wheel = self.car.createWheel()
+        wheel = self.car.createWheel(0.01)
 
         wheel.setNode(np.node())
         wheel.setChassisConnectionPointCs(pos)
@@ -452,13 +454,13 @@ class MyTapper(DirectObject):
         wheel.setWheelDirectionCs(Vec3(0, 0, -1))
         wheel.setWheelAxleCs(Vec3(1, 0, 0))
         wheel.setWheelRadius(self.wheel_radius)
-        wheel.setSuspensionStiffness(40)
-        wheel.setWheelsDampingRelaxation(25)
-        wheel.setWheelsDampingCompression(52)
-        wheel.setRollInfluence(0)
-        wheel.setMaxSuspensionTravelCm(20)
-        wheel.setMaxSuspensionForce(8000)
-        wheel.setFrictionSlip(1.2)
+        wheel.setSuspensionStiffness(100)
+        wheel.setWheelsDampingRelaxation(23)
+        wheel.setWheelsDampingCompression(44)
+        wheel.setRollInfluence(0.1)
+        wheel.setMaxSuspensionTravelCm(10)
+        wheel.setFrictionSlip(100)
+        # wheel.setWheelsSuspensionForce(1000)
 
     def update(self, task):
         car_pos = self.car_node.getPos()
@@ -477,8 +479,10 @@ class MyTapper(DirectObject):
         angular_velocity = car_speed_ms / self.wheel_radius
 
         drag_coefficient = 0.5 * self.drag_coefficient * 1.29 * 5
-        drag_force = drag_coefficient * car_speed_ms_abs ** 2
-        rr_force = drag_coefficient * 30 * car_speed_ms_abs
+        drag_force = drag_coefficient * car_speed_ms ** 2
+        rr_force = drag_coefficient * 30 * car_speed_ms
+        if car_speed < 0:
+            drag_force = -drag_force
 
         fw_downforce = 0.5 * self.fw_cord * self.fw_wingspan * self.fw_clift * 1.29 * car_speed_ms_abs ** 2
         rw_downforce = 0.5 * self.rw_cord * self.rw_wingspan * self.rw_clift * 1.29 * car_speed_ms_abs ** 2
@@ -492,7 +496,8 @@ class MyTapper(DirectObject):
         self.car_node.node().applyForce(Vec3(0, 0, -rw_downforce), Point3(-0.61, -2.47, 1.2))
         self.car_node.node().applyForce(Vec3(0, 0, -rw_downforce), Point3(0.61, -2.47, 1.2))
 
-        rpm = abs(angular_velocity) * self.gear_ratios[self.gear] * self.differential_ratio * 60 / (2 * math.pi)
+        rpm = angular_velocity * self.gear_ratios[self.gear] * self.differential_ratio * 60 / (2 * math.pi)
+        rpm = max(0, rpm)
         engine_torque = self.get_engine_torque(rpm)
 
         max_engine_force = engine_torque * self.gear_ratios[self.gear] * self.differential_ratio * \
@@ -515,7 +520,6 @@ class MyTapper(DirectObject):
         world.doPhysics(dt, 10, 1 / 100)
 
         min_rpm = min(self.engine_torque_curve, key=lambda p: p[0])[0]
-
         self.speed_dial.setHpr(0, 0, car_speed_abs * (270/360))
         self.rpm_dial.setHpr(0, 0, max(rpm, min_rpm) * (270/20000) * (self.accelerator / 128))
 
@@ -555,10 +559,12 @@ class MyTapper(DirectObject):
         self.update_gear_text()
 
     def update_gear_text(self):
-        if self.gear >= 1:
-            text = str(self.gear)
+        if self.gear >= 2:
+            text = str(self.gear-1)
         elif self.gear == 0:
             text = "R"
+        elif self.gear == 1:
+            text = "N"
         else:
             text = ""
         self.gear_text.setText(text)
@@ -587,7 +593,7 @@ debugNode.showConstraints(True)
 debugNode.showBoundingBoxes(True)
 debugNode.showNormals(True)
 debugNP = render.attachNewNode(debugNode)
-# debugNP.show()
+debugNP.show()
 
 world.setDebugNode(debugNP.node())
 
