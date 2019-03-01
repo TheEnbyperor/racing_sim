@@ -12,14 +12,10 @@ import math
 import threading
 import json
 
-camera_start = [0, 5, 0.5]
-
 base = ShowBase()
-base.setBackgroundColor(0.1, 0.1, 0.8, 1)
+base.setBackgroundColor(0.1, 0.1, 0.1, 1)
 base.setFrameRateMeter(True)
 base.disableMouse()
-base.camera.setPos(*camera_start)
-base.camera.setHpr(0, 0, 0)
 
 world = BulletWorld()
 world.setGravity(Vec3(0, 0, -9.81))
@@ -169,8 +165,6 @@ def make_circle(x1, y1, z1, x2, y2, z2, inner_radius, end_inner_radius, arc, new
 class MyTapper(DirectObject):
     def __init__(self):
         super().__init__()
-
-        self.cam_pos = camera_start
 
         self.controller = inputs.devices.gamepads[0]
         self.steering = 0
@@ -520,6 +514,9 @@ class MyTapper(DirectObject):
         world.doPhysics(dt, 10, 1 / 100)
 
         min_rpm = min(self.engine_torque_curve, key=lambda p: p[0])[0]
+        if self.gear == 1:
+            min_rpm = max(self.engine_torque_curve, key=lambda p: p[0])[0]
+
         self.speed_dial.setHpr(0, 0, car_speed_abs * (270/360))
         self.rpm_dial.setHpr(0, 0, max(rpm, min_rpm) * (270/20000) * (self.accelerator / 128))
 
