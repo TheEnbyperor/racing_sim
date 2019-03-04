@@ -85,7 +85,7 @@ def make_circle(x1, y1, z1, x2, y2, z2, inner_radius, end_inner_radius, arc, new
     ccw = arc < 0
     arc = -arc if ccw else arc
 
-    num_parts = 10 * (arc / 360) ** -1
+    num_parts = 50 * (arc / 360) ** -1
     num_draw = round(num_parts * (arc / 360))
 
     x3 = x1 - x2
@@ -178,26 +178,26 @@ class MyTapper(DirectObject):
         self.wheel_radius = 0.4
         self.drag_coefficient = 0.48
         self.engine_torque_curve = [
-            (1000, 100),
-            (2000, 120),
-            (3000, 140),
-            (4000, 160),
-            (5000, 180),
-            (6000, 220),
-            (7000, 260),
-            (8000, 300),
-            (9000, 340),
-            (10000, 340),
-            (11000, 340),
-            (12000, 340),
-            (13000, 345),
-            (14000, 350),
+            (0, 466),
+            (564, 469),
+            (1612, 469),
+            (2822, 518),
+            (3870, 517),
+            (4516, 597),
+            (5000, 613),
+            (5564, 600),
+            (6048, 655),
+            (6693, 681),
+            (7177, 716),
+            (7822, 696),
+            (8306, 696),
+            (11048, 569),
+            (13951, 391),
             (15000, 339),
-            (16000, 355),
-            (17000, 360),
-            (18000, 360),
-            (19000, 330),
-            (20000, 30)
+            (15483, 301),
+            (16612, 247),
+            (17177, 65),
+            (18306, 55)
         ]
         self.fw_wingspan = 0.64
         self.fw_cord = 1.01
@@ -205,9 +205,6 @@ class MyTapper(DirectObject):
         self.rw_wingspan = 0.64
         self.rw_cord = 0.51
         self.rw_clift = 0.2
-
-        self.controller_t = threading.Thread(target=self.controller_tf, daemon=True)
-        self.controller_t.start()
 
         track_f = open("track.json")
         track_data = json.load(track_f)
@@ -374,25 +371,7 @@ class MyTapper(DirectObject):
         self.track.setTwoSided(True)
         self.track.setCollideMask(BitMask32.allOn())
 
-        car = loader.loadModel("car.egg")
-        car.flattenLight()
-        car_bounds = car.getTightBounds()
-        car_shape = BulletBoxShape(Vec3((car_bounds[1].x - car_bounds[0].x) / 2,
-                                        (car_bounds[1].y - car_bounds[0].y) / 2,
-                                        (car_bounds[1].z - car_bounds[0].z) / 2))
-        car_ts = TransformState.makePos(Point3(0, 0, 0.5))
-
-        self.car_node = render.attachNewNode(BulletRigidBodyNode('Car'))
-        self.car_node.node().setDeactivationEnabled(False)
-        self.car_node.node().setMass(600)
-        self.car_node.node().addShape(car_shape, car_ts)
-        world.attachRigidBody(self.car_node.node())
-        car.reparentTo(self.car_node)
-        self.car_node.setPos(0, 6, 1)
-
-        self.car = BulletVehicle(world, self.car_node.node())
-        self.car.setCoordinateSystem(ZUp)
-        world.attachVehicle(self.car)
+        self.track_bounds = self.track.getTightBounds()
 
         dial_scale = 0.2
 
@@ -406,6 +385,75 @@ class MyTapper(DirectObject):
         rpm_dial.setTransparency(TransparencyAttrib.MAlpha)
         self.rpm_dial = OnscreenImage(image='dial.rgb', parent=rpm_dial)
         self.gear_text = OnscreenText(text='N', pos=(-0.02, -0.67), scale=0.4, parent=rpm_dial, fg=(255, 0, 0, 1))
+
+        self.car_node = None
+        self.car = None
+
+        self.reset()
+
+        dlight = DirectionalLight('dlight')
+        dlnp = render.attachNewNode(dlight)
+        dlnp.setHpr(0, -80, 0)
+        render.setLight(dlnp)
+        alight = AmbientLight('alight')
+        alight.setColor(Vec4(0.2, 0.2, 0.2, 1))
+        alnp = render.attachNewNode(alight)
+        render.setLight(alnp)
+
+        myFog = Fog("Fog")
+        myFog.setColor(0.2, 0.2, 0.2)
+        myFog.setExpDensity(0.005)
+        render.setFog(myFog)
+
+        taskMgr.add(self.update, 'update')
+        self.controller_t = threading.Thread(target=self.controller_tf, daemon=True)
+        self.controller_t.start()
+
+    def make_wheel(self, pos, front, np):
+        wheel = self.car.createWheel(0.02)
+
+        wheel.setNode(np.node())
+        wheel.setChassisConnectionPointCs(pos)
+        wheel.setFrontWheel(front)
+        wheel.setWheelDirectionCs(Vec3(0, 0, -1))
+        wheel.setWheelAxleCs(Vec3(1, 0, 0))
+        wheel.setWheelRadius(self.wheel_radius)
+        wheel.setSuspensionStiffness(200)
+        wheel.setWheelsDampingRelaxation(23)
+        wheel.setWheelsDampingCompression(44)
+        wheel.setRollInfluence(0.1)
+        wheel.setMaxSuspensionTravelCm(10)
+        wheel.setFrictionSlip(1.2)
+        # wheel.setMaxSuspensionForce(1000)
+
+    def reset(self):
+        car = loader.loadModel("car.egg")
+        car.flattenLight()
+        car_bounds = car.getTightBounds()
+        car_shape = BulletBoxShape(Vec3((car_bounds[1].x - car_bounds[0].x) / 2,
+                                        (car_bounds[1].y - car_bounds[0].y) / 2,
+                                        (car_bounds[1].z - car_bounds[0].z) / 2))
+        car_ts = TransformState.makePos(Point3(0, 0, 0.5))
+
+        if self.car_node is not None:
+            self.car_node.removeNode()
+
+        self.car_node = render.attachNewNode(BulletRigidBodyNode('Car'))
+        self.car_node.node().setDeactivationEnabled(False)
+        self.car_node.node().setMass(600)
+        self.car_node.node().addShape(car_shape, car_ts)
+        world.attachRigidBody(self.car_node.node())
+        car.reparentTo(self.car_node)
+        self.car_node.setPos(0, 6, 1)
+
+        self.car = BulletVehicle(world, self.car_node.node())
+        self.car.setCoordinateSystem(ZUp)
+        world.attachVehicle(self.car)
+
+        self.car_node.setPos(0, 6, 1)
+        self.car_node.setHpr(0, 0, 0)
+        self.car.resetSuspension()
+        self.car_node.node().clearForces()
 
         wheel_fl = loader.loadModel("wheelL")
         wheel_fl.reparentTo(render)
@@ -423,42 +471,16 @@ class MyTapper(DirectObject):
         wheel_rr.reparentTo(render)
         self.make_wheel(Point3(0.4, -1.35, 0), False, wheel_rr)
 
-        dlight = DirectionalLight('dlight')
-        dlnp = render.attachNewNode(dlight)
-        dlnp.setHpr(0, -80, 0)
-        render.setLight(dlnp)
-        alight = AmbientLight('alight')
-        alight.setColor(Vec4(0.2, 0.2, 0.2, 1))
-        alnp = render.attachNewNode(alight)
-        render.setLight(alnp)
-
-        myFog = Fog("Fog")
-        myFog.setColor(0.2, 0.2, 0.2)
-        myFog.setExpDensity(0.005)
-        render.setFog(myFog)
-
-        taskMgr.add(self.update, 'update')
-
-    def make_wheel(self, pos, front, np):
-        wheel = self.car.createWheel(0.01)
-
-        wheel.setNode(np.node())
-        wheel.setChassisConnectionPointCs(pos)
-        wheel.setFrontWheel(front)
-        wheel.setWheelDirectionCs(Vec3(0, 0, -1))
-        wheel.setWheelAxleCs(Vec3(1, 0, 0))
-        wheel.setWheelRadius(self.wheel_radius)
-        wheel.setSuspensionStiffness(100)
-        wheel.setWheelsDampingRelaxation(23)
-        wheel.setWheelsDampingCompression(44)
-        wheel.setRollInfluence(0.1)
-        wheel.setMaxSuspensionTravelCm(10)
-        wheel.setFrictionSlip(100)
-        # wheel.setWheelsSuspensionForce(1000)
-
     def update(self, task):
         car_pos = self.car_node.getPos()
         base.camera.lookAt(car_pos)
+
+        if car_pos.x < self.track_bounds[0].x or \
+            car_pos.y < self.track_bounds[0].y or \
+            car_pos.z < self.track_bounds[0].z:
+            self.reset()
+            return task.cont
+
         car_vec = self.car.getForwardVector()
         camera_distance = -15
         camera_pos = self.car_node.getPos() + Vec3(camera_distance * car_vec.x,
@@ -501,12 +523,13 @@ class MyTapper(DirectObject):
         self.car.applyEngineForce(engine_force, 2)
         self.car.applyEngineForce(engine_force, 3)
 
-        self.car.setBrake(self.brake, 0)
-        self.car.setBrake(self.brake, 1)
-        self.car.setBrake(self.brake, 2)
-        self.car.setBrake(self.brake, 3)
+        brake_adj = 5
+        self.car.setBrake(self.brake*brake_adj, 0)
+        self.car.setBrake(self.brake*brake_adj, 1)
+        self.car.setBrake(self.brake*brake_adj, 2)
+        self.car.setBrake(self.brake*brake_adj, 3)
 
-        steering_ratio = max((car_speed_abs / 5), 10)
+        steering_ratio = max((car_speed_abs / 3), 30)
         self.car.setSteeringValue(self.steering / steering_ratio, 0)
         self.car.setSteeringValue(self.steering / steering_ratio, 1)
 
@@ -590,7 +613,7 @@ debugNode.showConstraints(True)
 debugNode.showBoundingBoxes(True)
 debugNode.showNormals(True)
 debugNP = render.attachNewNode(debugNode)
-debugNP.show()
+#debugNP.show()
 
 world.setDebugNode(debugNP.node())
 
