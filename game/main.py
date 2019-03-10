@@ -30,7 +30,7 @@ class RacingSim(DirectObject):
         track_f.close()
 
         self.track = track.Track(track_data, world)
-        self.car = car.Car(base, world)
+        self.car = car.Car(base, world, self.track)
 
         dlight = DirectionalLight('dlight')
         dlnp = render.attachNewNode(dlight)
@@ -85,7 +85,7 @@ class RacingSim(DirectObject):
                     self.car.steering = -(event.state - 128)
                 elif event.code == "ABS_Y":
                     if event.state < 128:
-                        self.car.accelerator = -event.state + 128
+                        self.car.accelerator = -event.state + 127
                     else:
                         self.car.brake = event.state - 128
 
