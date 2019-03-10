@@ -54,6 +54,7 @@ class Track(DirectObject):
             }
 
     def gen_segments(self):
+        i = 0
         for segment in self.track_data["segments"]:
             seg_type = segment["type"]
             surface = self.surfaces[segment["surface"]]
@@ -76,10 +77,14 @@ class Track(DirectObject):
             segment_mesh.addGeom(section)
 
             segment_shape = BulletTriangleMeshShape(segment_mesh, dynamic=False)
-            segment_ghost = render.attachNewNode(BulletGhostNode('track_segment'))
+            segment_ghost = render.attachNewNode(BulletGhostNode(f'track_segment_{i}'))
             segment_ghost.node().addShape(segment_shape)
+            self.world.attachGhost(segment_ghost.node())
+            segment_ghost.setTwoSided(True)
 
             self.segments.append(segment_ghost)
+
+            i += 1
 
     def gen_str_segment(self, segment, surface, gradient, segment_shape):
         length = segment["length"]
