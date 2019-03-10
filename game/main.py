@@ -23,6 +23,8 @@ class RacingSim(DirectObject):
 
         self.controller = inputs.devices.gamepads[0]
 
+        self.cur_track_segment = 0
+
         track_f = open("track.json")
         track_data = json.load(track_f)
         track_f.close()
@@ -58,9 +60,22 @@ class RacingSim(DirectObject):
         base.camera.setPos(camera_pos)
         base.camera.lookAt(car_pos)
 
+        contact_segments = [self.car.car_node.node() in y for y in
+                            (x.node().getOverlappingNodes() for x in self.track.segments) if len(y) > 0]
+        if contact_segments[self.cur_track_segment]:
+            self.cur_track_segment += 1
+            if self.cur_track_segment == len(self.track.segments):
+                self.cur_track_segment = 0
+                self.lap()
+            print(self.cur_track_segment)
+
+
         dt = globalClock.getDt()
         world.doPhysics(dt, 10, 1 / 100)
         return task.cont
+
+    def lap(self):
+        print("Lap!")
 
     def controller_tf(self):
         while True:
@@ -86,7 +101,7 @@ debugNode.showConstraints(True)
 debugNode.showBoundingBoxes(True)
 debugNode.showNormals(True)
 debugNP = render.attachNewNode(debugNode)
-# debugNP.show()
+debugNP.show()
 
 world.setDebugNode(debugNP.node())
 
