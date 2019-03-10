@@ -7,10 +7,11 @@ import math
 
 
 class Car(DirectObject):
-    def __init__(self, base, world):
+    def __init__(self, base, world, track):
         super().__init__()
 
         self.world = world
+        self.track = track
 
         self.steering = 0
         self.accelerator = 0
@@ -70,6 +71,7 @@ class Car(DirectObject):
         self.gear_text = OnscreenText(text='N', pos=(-0.02, -0.67), scale=0.4, parent=rpm_dial, fg=(255, 0, 0, 1))
 
         self.reset()
+        taskMgr.add(self.update, 'update')
 
     def make_wheel(self, pos, front, np):
         wheel = self.car.createWheel(0.02)
@@ -165,12 +167,13 @@ class Car(DirectObject):
     def update(self, task):
         car_pos = self.pos
         car_vec = self.forward_vector
+        track_bounds = self.track.tight_bounds
 
-        if car_pos.x < self.track_bounds[0].x or \
-                car_pos.x > self.track_bounds[1].x or \
-                car_pos.y < self.track_bounds[0].y or \
-                car_pos.y > self.track_bounds[1].y or \
-                car_pos.z < self.track_bounds[0].z:
+        if car_pos.x < track_bounds[0].x or \
+                car_pos.x > track_bounds[1].x or \
+                car_pos.y < track_bounds[0].y or \
+                car_pos.y > track_bounds[1].y or \
+                car_pos.z < track_bounds[0].z:
             self.reset()
             return task.cont
 
